@@ -146,6 +146,9 @@ definitions:
       freq:
         description: Frequency of the recurrence
         $ref: '#/definitions/FreqEnum'
+      interval:
+        description: Represents at which intervals the recurrence rule repeats. The default value is "1", meaning every second for a SECONDLY rule, every minute for a MINUTELY rule etc.
+        type: integer
       count:
         description: Defines the number of occurrences at which to range-bound the recurrence
         type: integer

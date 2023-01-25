@@ -27,6 +27,7 @@ public class RRuleConsultationData implements RRule {
 
     private FreqEnum freq;
     private Integer count;
+    private Integer interval;
     private DayEnum wkst;
     private List<DayEnum> byweekday;
     private List<Integer> bymonth;

@@ -35,6 +35,11 @@ public class RRuleWriterConverter implements Converter<RRule, Document> {
             result.append("count", count);
         }
 
+        Integer interval = source.getInterval();
+        if (interval != null) {
+            result.append("interval", interval);
+        }
+
         DayEnum wkst = source.getWkst();
         if (wkst != null) {
             result.append("wkst", wkst);

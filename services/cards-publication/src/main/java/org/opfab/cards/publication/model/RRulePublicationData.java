@@ -34,6 +34,8 @@ public class RRulePublicationData implements RRule {
 
     private FreqEnum freq;
     private Integer count;
+    @Builder.Default
+    private Integer interval = 1;
 
     @Builder.Default
     private DayEnum wkst = DayEnum.MO;

@@ -31,6 +31,7 @@ public class RRuleReadConverter implements Converter<Document, RRule> {
 
         FreqEnum freq = FreqEnum.valueOf(source.getString("freq"));
         Integer count = source.getInteger("count");
+        Integer interval = source.getInteger("interval");
         DayEnum wkst = DayEnum.valueOf(source.getString("wkst"));
 
         List<String> byweekdayStringList = (List<String>) source.get("byweekday");
@@ -49,6 +50,7 @@ public class RRuleReadConverter implements Converter<Document, RRule> {
         RRulePublicationData.RRulePublicationDataBuilder builder = RRulePublicationData.builder()
                 .freq(freq)
                 .count(count)
+                .interval(interval)
                 .wkst(wkst)
                 .byweekday(byweekdayEnumList)
                 .bymonth(bymonth)
