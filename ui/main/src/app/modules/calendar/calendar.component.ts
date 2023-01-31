@@ -31,6 +31,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import bootstrapPlugin from '@fullcalendar/bootstrap';
 import rrulePlugin from '@fullcalendar/rrule';
 
+const NB_MILLISECONDS_IN_ONE_MINUTE = 60000; // 1 minute
+
 @Component({
     selector: 'of-calendar',
     templateUrl: './calendar.component.html',
@@ -180,6 +182,7 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
         this.calendarOptions.events = this.calendarEvents;
     }
 
+    /* For information, getTimezoneOffset returns -60 (minutes) for Europe/Paris timezone, in winter time */
     private computeRRuleCalendarEvents(card: any) {
 
         if (!! card.rRule) {
@@ -193,9 +196,10 @@ export class CalendarComponent implements OnInit, OnDestroy, AfterViewInit {
                 ],
                 rrule: {
                     freq: card.rRule.freq,
+                    interval: card.rRule.interval,
                     byweekday: card.rRule.byweekday,
                     bymonth: card.rRule.bymonth,
-                    dtstart: new Date(card.startDate),
+                    dtstart: new Date(card.startDate - new Date(card.startDate).getTimezoneOffset() * NB_MILLISECONDS_IN_ONE_MINUTE),
                     until: card.endDate,
                     byhour: card.rRule.byhour,
                     byminute: card.rRule.byminute
