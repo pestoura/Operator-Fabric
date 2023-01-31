@@ -780,7 +780,7 @@ describe('RRuleReminderUtils:getNextTimeForRepeating without or invalid recurren
     });
 });
 
-describe('RRuleReminderUtils:getNextTimeForRepeating with interval, and current date after card.startDate  ', () => {
+describe('RRuleReminderUtils:getNextTimeForRepeating with hourly recurrence, and current date after card.startDate  ', () => {
     let testCard: Card;
 
     beforeAll(() => {
@@ -898,7 +898,7 @@ describe('RRuleReminderUtils:getNextTimeForRepeating with interval, and current 
     });
 });
 
-describe('RRuleReminderUtils:getNextTimeForRepeating with interval, and current date before card.startDate ', () => {
+describe('RRuleReminderUtils:getNextTimeForRepeating with hourly recurrence, and current date before card.startDate ', () => {
     let testCard: Card;
 
     beforeAll(() => {
