@@ -61,14 +61,14 @@
             <td style="width:4%">
                 AT :
             </td>
-            <td style="width:15%">
+            <td style="width:8%">
                 <div class="opfab-input">
                     <label> TIME </label>
                     <input type="time" id="time" style="text-align:center" value="{{padStart card.data.byhour 2 '0'}}:{{padStart card.data.byminute 2 '0'}}">
                 </div>
             </td>
 
-            <td style="width:2%">
+            <td style="width:1%">
 
             <td style="width:7%">
                 OR Every :
@@ -76,7 +76,7 @@
             <td style="width:7%">
                 <div class="opfab-input">
                     <label> HOURS </label>
-                    <input size="3" maxlength="3" type="text" id="intervalForHours" value="{{#if card.data.interval}}{{card.data.interval}}{{else}}2{{/if}}">
+                    <input size="3" maxlength="3" type="text" id="intervalForHours" value="{{#if card.data.interval}}{{card.data.interval}}{{/if}}">
                 </div>
             </td>
 
@@ -171,21 +171,82 @@
                 if (document.getElementById("November").checked)  bymonth.push(11);
                 if (document.getElementById("December").checked)  bymonth.push(12);
 
-                const rRule = {
-                    freq: 'DAILY',
+                let rRule;
+                let card;
+                let freq = 'DAILY';
+                const interval = document.getElementById('intervalForHours').value;
+
+                if (!!interval) {
+                    freq = 'HOURLY';
+                    rRule = {
+                        freq: freq,
+                        interval: (!!interval ? interval : 1),
+                        byweekday : byweekday,
+                        durationInMinutes: durationInMinutes,
+                        bymonth: bymonth
+                    };
+
+                    card = {
+                        summary: { key: "taskAdvanced.summary" },
+                        title: { key: "taskAdvanced.title" },
+                        secondsBeforeTimeSpanForReminder: minutesForReminder * 60,
+                        data: {
+                            taskDescription: taskDescription,
+                            freq: freq,
+                            interval: interval,
+                            durationInMinutes: durationInMinutes,
+                            minutesForReminder: minutesForReminder,
+                            byweekday: byweekday,
+                            bymonth: bymonth
+                        },
+                        rRule: rRule
+                    };
+                } else {
+                    rRule = {
+                        freq: freq,
+                        byweekday : byweekday,
+                        byhour: byhour,
+                        byminute: byminute,
+                        durationInMinutes: durationInMinutes,
+                        bymonth: bymonth
+                    };
+
+                    card = {
+                        summary: { key: "taskAdvanced.summary" },
+                        title: { key: "taskAdvanced.title" },
+                        secondsBeforeTimeSpanForReminder: minutesForReminder * 60,
+                        data: {
+                            taskDescription: taskDescription,
+                            freq: freq,
+                            byhour: byhour,
+                            byminute: byminute,
+                            durationInMinutes: durationInMinutes,
+                            minutesForReminder: minutesForReminder,
+                            byweekday: byweekday,
+                            bymonth: bymonth
+                        },
+                        rRule: rRule
+                    };
+                }
+
+                /* const rRule = {
+                    freq: freq,
+                    interval: (!!interval ? interval : 1),
                     byweekday : byweekday,
                     byhour: byhour,
                     byminute: byminute,
                     durationInMinutes: durationInMinutes,
                     bymonth: bymonth
-                }
+                } */
             
-                const card = {
+                /* const card = {
                     summary: { key: "taskAdvanced.summary" },
                     title: { key: "taskAdvanced.title" },
                     secondsBeforeTimeSpanForReminder: minutesForReminder * 60,
                     data: {
                         taskDescription: taskDescription,
+                        freq: freq,
+                        interval: interval,
                         byhour: byhour,
                         byminute: byminute,
                         durationInMinutes: durationInMinutes,
@@ -194,7 +255,7 @@
                         bymonth: bymonth
                     },
                     rRule: rRule
-                };
+                }; */
 
                 return {
                     valid: true,

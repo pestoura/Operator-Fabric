@@ -122,6 +122,7 @@ export class RRule {
     constructor(
         public freq?: Frequency,
         public count?: number,
+        public interval?: number,
         public wkst?: Day,
         public byweekday?: Day[],
         public bymonth?: number[],
